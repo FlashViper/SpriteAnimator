@@ -1,13 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://3y0d4k3r3g6i"]
+[gd_scene load_steps=9 format=3 uid="uid://yf3bedg53usd"]
 
-[ext_resource type="Theme" uid="uid://ch6jp4iqxgjs7" path="res://GUI/theme_default.tres" id="1_4t2ur"]
-[ext_resource type="Script" path="res://display/display_grid.gd" id="2_oufog"]
+[ext_resource type="Theme" uid="uid://ch6jp4iqxgjs7" path="res://gui/theme_default.tres" id="1_qtch4"]
 [ext_resource type="Script" path="res://basic_cleaner/scripts/animation_manager.gd" id="2_r0hrm"]
-[ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://grid.png" id="3_e3edl"]
 [ext_resource type="Script" path="res://basic_cleaner/animation_list.gd" id="3_kd8lf"]
 [ext_resource type="PackedScene" uid="uid://b05w68m4mosn6" path="res://basic_cleaner/gui/list_item.tscn" id="4_sun7o"]
+[ext_resource type="Script" path="res://modules/display/display_grid.gd" id="5_ehlyo"]
 [ext_resource type="Script" path="res://basic_cleaner/scripts/animation_preview.gd" id="5_mcac0"]
 [ext_resource type="Script" path="res://basic_cleaner/animation_creator.gd" id="6_q35yi"]
+[ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://gui/grid.png" id="6_tl4xv"]
 
 [node name="AnimationManager" type="PanelContainer"]
 anchors_preset = 15
@@ -15,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_4t2ur")
+theme = ExtResource("1_qtch4")
 script = ExtResource("2_r0hrm")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -126,8 +126,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_oufog")
-texture = ExtResource("3_e3edl")
+script = ExtResource("5_ehlyo")
+texture = ExtResource("6_tl4xv")
 
 [node name="Display" type="Node2D" parent="HBoxContainer/VBoxContainer/Canvas/CanvasRoot"]
 unique_name_in_owner = true

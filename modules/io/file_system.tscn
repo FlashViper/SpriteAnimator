@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dort6li21nncw"]
+
+[ext_resource type="Script" path="res://modules/io/file_system.gd" id="1_jk11y"]
+
+[node name="FileSystem" type="FileDialog"]
+size = Vector2i(657, 342)
+popup_window = true
+ok_button_text = "Save"
+access = 2
+script = ExtResource("1_jk11y")

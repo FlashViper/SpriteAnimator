@@ -13,11 +13,12 @@ config_version=5
 config/name="CharacterAnimator"
 run/main_scene="res://basic_cleaner/animation_manager.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
-config/icon="res://GUI/app_icon.png"
+config/icon="res://gui/app_icon.png"
 
 [autoload]
 
-FileSystem="*res://IO/file_system.tscn"
+FileSystem="*res://modules/io/file_system.tscn"
+ProjectManager="*res://modules/project_manager/project_manager.gd"
 
 [debug]
 
