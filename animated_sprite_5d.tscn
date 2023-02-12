@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://xwv1x4dj1vmm"]
+
+[ext_resource type="Script" path="res://animation/animated_sprite_5d.gd" id="1_0h3d0"]
+
+[node name="AnimatedSprite5D" type="Node2D"]
+position = Vector2(796, 431)
+script = ExtResource("1_0h3d0")

@@ -1,0 +1,42 @@
+{
+	"meta": {
+		"file": "FlashViper Animation Group",
+		"version": "0.1"
+	},
+	"texture_path": "",
+	"frames": [
+		{
+			"region": "[P: (142, 321), S: (63, 63)]",
+			"pivot": "(32, 32)"
+		},
+		{
+			"region": "[P: (0, 0), S: (373, 220)]",
+			"pivot": "(187, 110.5)"
+		},
+		{
+			"region": "[P: (142, 235), S: (193, 71)]",
+			"pivot": "(97, 47)"
+		},
+		{
+			"region": "[P: (350, 235), S: (73, 148)]",
+			"pivot": "(32.5, 63.5)"
+		},
+		{
+			"region": "[P: (0, 235), S: (127, 127)]",
+			"pivot": "(64, 64)"
+		}
+	],
+	"animations": [
+		{
+			"name": "",
+			"frames": [
+				0,
+				1,
+				2,
+				3,
+				4
+			],
+			"loops": true
+		}
+	]
+}

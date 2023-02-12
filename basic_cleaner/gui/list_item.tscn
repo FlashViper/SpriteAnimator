@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b05w68m4mosn6"]
+
+[ext_resource type="Script" path="res://basic_cleaner/gui/list_item.gd" id="1_nhw2w"]
+
+[node name="ListItem" type="MarginContainer"]
+mouse_filter = 0
+script = ExtResource("1_nhw2w")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Name" type="Label" parent="Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Animation Name"
+clip_text = true

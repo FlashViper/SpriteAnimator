@@ -1,0 +1,138 @@
+[gd_scene load_steps=9 format=3 uid="uid://3y0d4k3r3g6i"]
+
+[ext_resource type="Theme" uid="uid://ch6jp4iqxgjs7" path="res://GUI/theme_default.tres" id="1_4t2ur"]
+[ext_resource type="Script" path="res://display/display_grid.gd" id="2_oufog"]
+[ext_resource type="Script" path="res://basic_cleaner/scripts/animation_manager.gd" id="2_r0hrm"]
+[ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://grid.png" id="3_e3edl"]
+[ext_resource type="Script" path="res://basic_cleaner/animation_list.gd" id="3_kd8lf"]
+[ext_resource type="PackedScene" uid="uid://b05w68m4mosn6" path="res://basic_cleaner/gui/list_item.tscn" id="4_sun7o"]
+[ext_resource type="Script" path="res://basic_cleaner/scripts/animation_preview.gd" id="5_mcac0"]
+[ext_resource type="Script" path="res://basic_cleaner/animation_creator.gd" id="6_q35yi"]
+
+[node name="AnimationManager" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4t2ur")
+script = ExtResource("2_r0hrm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="List" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/List"]
+layout_mode = 2
+
+[node name="ListHeader" type="PanelContainer" parent="HBoxContainer/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/List/VBoxContainer/ListHeader"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/List/VBoxContainer/ListHeader/MarginContainer"]
+layout_mode = 2
+text = "Animation List:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/List/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/List/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ListRoot" type="VBoxContainer" parent="HBoxContainer/List/VBoxContainer/ScrollContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_kd8lf")
+animation_scene = ExtResource("4_sun7o")
+
+[node name="PropertiesHeader" type="PanelContainer" parent="HBoxContainer/List/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/List/VBoxContainer/PropertiesHeader"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/List/VBoxContainer/PropertiesHeader/MarginContainer"]
+layout_mode = 2
+text = "Properties"
+horizontal_alignment = 1
+
+[node name="PropertiesRoot" type="VBoxContainer" parent="HBoxContainer/List/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LoopToggle" type="Button" parent="HBoxContainer/List/VBoxContainer/PropertiesRoot"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Loops: True"
+
+[node name="SaveButton" type="Button" parent="HBoxContainer/List/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Pack Animations"
+
+[node name="LoadButton" type="Button" parent="HBoxContainer/List/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Load Animation"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="Toolbar" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Toolbar"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Toolbar/HBoxContainer"]
+layout_mode = 2
+text = "open"
+
+[node name="Canvas" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="CanvasRoot" type="Control" parent="HBoxContainer/VBoxContainer/Canvas"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Grid" type="Control" parent="HBoxContainer/VBoxContainer/Canvas/CanvasRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_oufog")
+texture = ExtResource("3_e3edl")
+
+[node name="Display" type="Node2D" parent="HBoxContainer/VBoxContainer/Canvas/CanvasRoot"]
+unique_name_in_owner = true
+position = Vector2(591, 407)
+script = ExtResource("5_mcac0")
+
+[node name="Assembler" type="Node" parent="."]
+script = ExtResource("6_q35yi")

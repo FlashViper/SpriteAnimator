@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://ne02a77uolrq"]
+
+[ext_resource type="Script" path="res://animation_panel.gd" id="1_c36go"]
+[ext_resource type="Script" path="res://display/display_grid.gd" id="1_guh34"]
+[ext_resource type="Theme" uid="uid://ch6jp4iqxgjs7" path="res://GUI/theme_default.tres" id="1_oueex"]
+[ext_resource type="Script" path="res://display/input_grabber.gd" id="2_k3cpo"]
+[ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://grid.png" id="4_u6idu"]
+[ext_resource type="Script" path="res://display/display_sprites.gd" id="5_ws7xq"]
+[ext_resource type="PackedScene" uid="uid://cv7dxcll5kv6x" path="res://animation/animator.tscn" id="7_151lc"]
+
+[node name="AnimationPanel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_oueex")
+script = ExtResource("1_c36go")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "File Name or Something"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 45
+
+[node name="Canvas" type="MarginContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Background" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/Canvas"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("1_guh34")
+texture = ExtResource("4_u6idu")
+rectangle_size = 128
+
+[node name="Sprite_Draw" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/Canvas"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("5_ws7xq")
+
+[node name="Input_Grabber" type="Control" parent="MarginContainer/VBoxContainer/MarginContainer/Canvas"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+script = ExtResource("2_k3cpo")
+
+[node name="Animator" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_151lc")]
+layout_mode = 2
