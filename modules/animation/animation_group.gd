@@ -29,11 +29,6 @@ class SpriteFrame extends Resource:
 	var pivot : Vector2
 
 
-func save_to_file(path: String) -> void:
-	var f := FileAccess.open(path, FileAccess.WRITE)
-	f.store_string(JSON.stringify(self.to_dictionary(), "\t", false))
-
-
 func load_from_file(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
 	var data := JSON.parse_string(file.get_as_text()) as Dictionary
@@ -83,7 +78,7 @@ func to_dictionary() -> Dictionary:
 		sprite_anims.append(data)
 	
 	result["meta"] = METADATA
-	result["texture_path"] = base_texture.resource_path
+	result["texture_path"] = ""
 	result["frames"] = frames
 	result["animations"] = sprite_anims
 	
