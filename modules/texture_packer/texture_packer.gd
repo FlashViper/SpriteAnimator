@@ -4,7 +4,12 @@ const SpriteFrame := AnimationGroup.SpriteFrame
 
 
 func pack_textures(textures: Array[Texture2D]) -> Dictionary:
+	if textures == null:
+		printerr("Tried to pass a null array to pack_textures in texture_packer.gd")
+		return {}
+	
 	var frames : Array[SpriteFrame] = crop_to_frame(textures)
+	
 	var rects : Array[Rect2i] = []
 	for f in frames:
 		rects.append(f.region)
@@ -174,4 +179,7 @@ func assemble_texture(data: Array[Dictionary], width: int, height: int) -> Textu
 		
 		img.blit_rect(source.get_image(), source_region, atlas_region.position)
 	
-	return ImageTexture.create_from_image(img)
+
+	var tex := ImageTexture.new()
+	tex.set_image(img)
+	return tex

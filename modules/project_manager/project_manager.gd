@@ -1,12 +1,15 @@
 extends Node
 
 const PROJECT_FILE := "animations.proj"
+
+const TexturePacker := preload("res://modules/texture_packer/texture_packer.gd")
 const SpriteAnimation := AnimationGroup.SpriteAnimation
 const SpriteFrame := AnimationGroup.SpriteFrame
 
 const ProjectFiles := preload("project_filesystem.gd")
 
 var source_directory : String
+var export_file_name : String = "RESULT"
 var export_path : String
 
 var raw_sprites := {}
@@ -16,7 +19,6 @@ var filesystem : ProjectFiles
 
 func _ready() -> void:
 	filesystem = ProjectFiles.new()
-	load_project("C:/Users/ellio/Documents/Godot/AnimationGame/Art/Animations")
 
 
 func get_name_list() -> Array[String]:
@@ -43,10 +45,9 @@ func get_visible_animations() -> Array[SpriteAnimation]:
 
 
 func save_project(path: String) -> void:
-	# TODO: Save data here
 	var data := {
 		"export_path": export_path,
-		"textures": raw_sprites,
+		"textures": raw_sprites.keys(),
 		"animation_data": animation_data,
 	}
 	
@@ -69,8 +70,9 @@ func load_project(path: String) -> void:
 		var data : Dictionary = JSON.parse_string(f.get_as_text())
 		
 		export_path = data.export_path
-		raw_sprites = data.textures
 		animation_data = data.animation_data
+		for tex in data.textures:
+			raw_sprites[tex] = filesystem.load_texture(tex)
 		
 	
 	reload_project()
@@ -120,3 +122,58 @@ func export_project(path := "") -> void:
 	if path != "":
 		export_path = path
 	
+	if export_path == "":
+		export_path = await FileSystem.request_directory()#save_file(["sanim"])
+	
+	var visible_animations := []
+	for anim in animation_data:
+		if animation_data[anim].visible:
+			visible_animations.append(animation_data[anim])
+	
+	var required_textures : Array[String] = []
+	for anim in visible_animations:
+		for f in anim.frames:
+			required_textures.append(f)
+	
+	var textures : Array[Texture2D] = []
+	var texture_mapping := {}
+	
+	for tex_path in required_textures:
+		if texture_mapping.has(tex_path):
+			continue
+		
+		texture_mapping[tex_path] = textures.size()
+		textures.append(raw_sprites[tex_path])
+	
+	var group := AnimationGroup.new()
+	group.animations = []
+	
+	for anim in visible_animations:
+		var animation := SpriteAnimation.new()
+		animation.name = anim["name"]
+		animation.loops = anim["loops"]
+		
+		animation.frames = []
+		for f in anim.frames:
+			animation.frames.append(texture_mapping[f])
+		
+		group.animations.append(animation)
+	
+	var packer := TexturePacker.new()
+	var pack_data := packer.pack_textures(textures)
+	if pack_data.is_empty():
+		return
+	
+	group.sprite_frames = pack_data.frames
+	
+#	print(export_path + "/" + export_file_name + ".")
+#	print("HIIIIIIIII")
+	var export_path_template := "%s/%s." % [export_path, export_file_name]
+	var tex : Texture2D = pack_data.texture
+	tex.get_image().save_png(export_path_template + "png")
+	
+	var atlas_data := group.to_dictionary()
+	atlas_data.texture_path = export_path_template + "png"
+	
+	var file := FileAccess.open(export_path_template + "sanim", FileAccess.WRITE)
+	file.store_string(JSON.stringify(atlas_data, "\t"))

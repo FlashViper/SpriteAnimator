@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CharacterAnimator"
-run/main_scene="res://basic_cleaner/animation_manager.tscn"
+run/main_scene="res://gui/project_selector/project_selector.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://gui/app_icon.png"
 

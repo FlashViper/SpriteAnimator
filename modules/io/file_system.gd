@@ -26,7 +26,7 @@ func request_directory() -> String:
 	popup_centered(Vector2(1080, 600))
 	return await finished
 
-func request_save(extensions := PackedStringArray()) -> String:
+func request_save_file(extensions := PackedStringArray()) -> String:
 	file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	filters = extensions
 	
