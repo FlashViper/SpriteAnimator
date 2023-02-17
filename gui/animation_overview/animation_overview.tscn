@@ -1,16 +1,20 @@
-[gd_scene load_steps=14 format=3 uid="uid://c21hrqyy5cqvc"]
+[gd_scene load_steps=18 format=3 uid="uid://dbx5pu4d4yah5"]
 
 [ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_ac1xt"]
 [ext_resource type="StyleBox" uid="uid://d1g60f0qfeegt" path="res://gui/theme/styleboxes/panel_main.tres" id="2_8cv80"]
 [ext_resource type="StyleBox" uid="uid://cfwbeqpfcwcpp" path="res://gui/theme/styleboxes/subpanel_inner_shadow.tres" id="3_4cn2m"]
 [ext_resource type="Texture2D" uid="uid://cgb57hx41apgw" path="res://gui/theme/icons/icon_visible_true.png" id="3_rjh8b"]
 [ext_resource type="Texture2D" uid="uid://cu5nboty6l4b1" path="res://gui/theme/panels/panel_shadow.png" id="3_rs087"]
+[ext_resource type="Script" path="res://gui/animation_overview/animation_overview.gd" id="3_u3xe3"]
 [ext_resource type="Texture2D" uid="uid://rsuk8vqqx36m" path="res://gui/theme/icons/icon_play.png" id="4_k5kl8"]
-[ext_resource type="PackedScene" uid="uid://b05w68m4mosn6" path="res://basic_cleaner/gui/list_item.tscn" id="4_pengb"]
+[ext_resource type="PackedScene" uid="uid://dg6ft5e4rym56" path="res://gui/animation_overview/list_item.tscn" id="4_pengb"]
 [ext_resource type="Script" path="res://modules/display/display_grid.gd" id="4_q01ck"]
 [ext_resource type="Texture2D" uid="uid://by8lyd3mpq7tj" path="res://gui/theme/icons/icon_loop_on.png" id="5_5g8gj"]
 [ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://gui/grid.png" id="5_qcg7x"]
+[ext_resource type="Texture2D" uid="uid://6ijxtvwh23y4" path="res://gui/theme/icons/icon_search.png" id="5_qqruw"]
 [ext_resource type="Texture2D" uid="uid://dtpwswwq22sk" path="res://gui/theme/icons/icon_edit.png" id="6_nvcvl"]
+[ext_resource type="Script" path="res://gui/animation_overview/animation_preview.gd" id="7_oomet"]
+[ext_resource type="Script" path="res://gui/animation_overview/display_viewport.gd" id="7_vlgv0"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1uk4o"]
 
@@ -26,6 +30,8 @@ grow_vertical = 2
 theme = ExtResource("1_ac1xt")
 theme_type_variation = &"Main Panel"
 theme_override_styles/panel = ExtResource("2_8cv80")
+script = ExtResource("3_u3xe3")
+list_item = ExtResource("4_pengb")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -46,6 +52,7 @@ alignment = 1
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/MainPanels/Column_List"]
 layout_mode = 2
 placeholder_text = "Filter Animations"
+right_icon = ExtResource("5_qqruw")
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainPanels/Column_List"]
 layout_mode = 2
@@ -62,12 +69,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="ListItem" parent="MarginContainer/MainPanels/Column_List/PanelContainer/List_Scroll/ListRoot" instance=ExtResource("4_pengb")]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainPanels/Column_List/PanelContainer"]
-layout_mode = 2
 
 [node name="Control" type="Control" parent="MarginContainer/MainPanels/Column_List"]
 custom_minimum_size = Vector2(0, 20)
@@ -86,6 +87,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("7_vlgv0")
 
 [node name="Grid" type="Control" parent="MarginContainer/MainPanels/Column_Preview/Display"]
 material = SubResource("CanvasItemMaterial_1uk4o")
@@ -97,6 +99,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_q01ck")
 texture = ExtResource("5_qcg7x")
+
+[node name="Preview" type="Node2D" parent="MarginContainer/MainPanels/Column_Preview/Display"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(684, 458)
+script = ExtResource("7_oomet")
 
 [node name="Shadow" type="NinePatchRect" parent="MarginContainer/MainPanels/Column_Preview/Display"]
 material = SubResource("CanvasItemMaterial_x4il4")
@@ -119,7 +127,7 @@ layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Visible" type="TextureButton" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
+[node name="Visiblity" type="TextureButton" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture_normal = ExtResource("3_rjh8b")

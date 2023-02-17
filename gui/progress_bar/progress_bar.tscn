@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://ddhherkrvgln1"]
 
-[ext_resource type="Theme" uid="uid://ch6jp4iqxgjs7" path="res://gui/theme/theme_default.tres" id="1_3pqov"]
+[ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_3pqov"]
 [ext_resource type="Script" path="res://gui/progress_bar/progress_bar.gd" id="2_paslg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tq065"]

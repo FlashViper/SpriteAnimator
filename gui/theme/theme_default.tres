@@ -1,8 +1,10 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cjoh5r1fh3vv2"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cjoh5r1fh3vv2"]
 
 [ext_resource type="StyleBox" uid="uid://dtmgsb1h6d6o1" path="res://gui/theme/styleboxes/panel_inner_shadow.tres" id="1_jxcrh"]
 [ext_resource type="StyleBox" uid="uid://dsp8r61thnqdj" path="res://gui/theme/styleboxes/panel_button.tres" id="1_ympfh"]
 [ext_resource type="StyleBox" uid="uid://dgddgm3itd081" path="res://gui/theme/styleboxes/panel_flat_small.tres" id="2_tfsj8"]
+[ext_resource type="StyleBox" uid="uid://cjg8iiot8mlih" path="res://gui/theme/styleboxes/subpanel_inner_shadow_dark.tres" id="4_sxe4j"]
+[ext_resource type="StyleBox" uid="uid://cfwbeqpfcwcpp" path="res://gui/theme/styleboxes/subpanel_inner_shadow.tres" id="5_8j5fq"]
 
 [resource]
 Button/styles/normal = ExtResource("1_ympfh")
@@ -13,3 +15,5 @@ MarginContainer/constants/margin_left = 15
 MarginContainer/constants/margin_right = 15
 MarginContainer/constants/margin_top = 15
 PanelContainer/styles/panel = ExtResource("2_tfsj8")
+ProgressBar/styles/background = ExtResource("4_sxe4j")
+ProgressBar/styles/fill = ExtResource("5_8j5fq")

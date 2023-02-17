@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://v5s2ovpkmead" path="res://gui/project_selector/project_list_item.tscn" id="2_bhipa"]
 [ext_resource type="PackedScene" uid="uid://dnfmp7g3mal4d" path="res://gui/project_selector/project_preview.tscn" id="2_qte2f"]
 [ext_resource type="StyleBox" uid="uid://d1g60f0qfeegt" path="res://gui/theme/styleboxes/panel_main.tres" id="2_xckcr"]
-[ext_resource type="PackedScene" uid="uid://blfj4hf5mpf34" path="res://basic_cleaner/animation_manager.tscn" id="4_gdnnv"]
 [ext_resource type="StyleBox" uid="uid://dtmgsb1h6d6o1" path="res://gui/theme/styleboxes/panel_inner_shadow.tres" id="4_kyy4m"]
-[ext_resource type="PackedScene" path="res://gui/progress_bar/progress_bar.tscn" id="5_c6oa2"]
+[ext_resource type="PackedScene" uid="uid://dbx5pu4d4yah5" path="res://gui/animation_overview/animation_overview.tscn" id="4_wfdpe"]
+[ext_resource type="PackedScene" uid="uid://ddhherkrvgln1" path="res://gui/progress_bar/progress_bar.tscn" id="5_c6oa2"]
 
 [node name="ProjectSelector" type="PanelContainer"]
 anchors_preset = 15
@@ -19,7 +19,7 @@ theme = ExtResource("1_x7480")
 theme_type_variation = &"Main Panel"
 theme_override_styles/panel = ExtResource("2_xckcr")
 script = ExtResource("2_5t1sk")
-animation_overview_scene = ExtResource("4_gdnnv")
+animation_overview_scene = ExtResource("4_wfdpe")
 list_item_scene = ExtResource("2_bhipa")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

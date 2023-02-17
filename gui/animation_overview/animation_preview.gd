@@ -1,4 +1,7 @@
+#@icon()
 extends Node2D
+
+signal animation_updated
 
 @export var fps := 12
 
@@ -15,17 +18,6 @@ func set_animation(new: Array[Texture2D]) -> void:
 	refresh_animation()
 
 
-func update_scale() -> void:
-	var max_size := get_parent().size as Vector2
-	var max_tex_size := Vector2()
-	for a in animation:
-		max_tex_size = max(Vector2(a.get_size()), max_tex_size)
-	
-	var ratio := max_tex_size / max_size
-	var min_ratio := ratio[ratio.max_axis_index()]
-	scale = Vector2.ONE / min_ratio
-
-
 func set_loops(new: bool) -> void:
 	loops = new
 	refresh_animation()
@@ -35,6 +27,7 @@ func refresh_animation() -> void:
 	current_frame = 0
 	timer = 0
 	animation_finished = false
+	animation_updated.emit()
 
 
 func _process(delta: float) -> void:
