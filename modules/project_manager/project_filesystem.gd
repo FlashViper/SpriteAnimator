@@ -16,7 +16,7 @@ func get_files_from_dir(path: String) -> Dictionary:
 	var open : Array[String] = [""]
 	
 	while open.size() > 0:
-		var current_path := open.pop_front()
+		var current_path : String = open.pop_front()
 		var files := PackedStringArray()
 		
 		var dir := DirAccess.open("%s/%s" % [path, current_path])
@@ -46,7 +46,7 @@ func load_texture(path: String) -> Texture2D:
 
 func get_recent_paths() -> Array[String]:
 	if FileAccess.file_exists(PROJECT_LIST_PATH):
-		var lines := FileAccess.get_file_as_string(PROJECT_LIST_PATH).split("\n")
+		var lines := FileAccess.get_file_as_string(PROJECT_LIST_PATH).split("\n", false)
 		var remapped : Array[String] = []
 		for l in lines:
 			remapped.append(l)

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://6ddebigm4bho"]
+
+[ext_resource type="Texture2D" uid="uid://damt8w8cyelcm" path="res://gui/theme/panels/panel_flat.png" id="1_xh34s"]
+
+[resource]
+texture = ExtResource("1_xh34s")
+texture_margin_left = 37.9717
+texture_margin_top = 38.0
+texture_margin_right = 38.0
+texture_margin_bottom = 38.0
+modulate_color = Color(0.243137, 0.180392, 0.290196, 1)

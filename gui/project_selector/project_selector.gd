@@ -2,9 +2,11 @@ extends PanelContainer
 
 const ProjectFiles := preload("res://modules/project_manager/project_filesystem.gd")
 
+@export var animation_overview_scene : PackedScene
 @export var list_item_scene : PackedScene
 
 @onready var list_root := %ProjectList
+@onready var thread := Thread.new()
 
 func _ready() -> void:
 	reload_project_list()
@@ -37,12 +39,21 @@ func on_load_new_pressed() -> void:
 
 
 func load_directory(path: String) -> void:
-	ProjectManager.load_project(path)
+	thread.start(ProjectManager.load_project.bind(path))
+#	ProjectManager.load_project(path)
 	
 	var filesystem := ProjectFiles.new()
 	filesystem.add_recent_path(path)
 	
-	get_tree().change_scene_to_file("res://basic_cleaner/animation_manager.tscn")
+	%ProgressBar.show()
+	%ProgressBar.initialize()
+	ProjectManager.progress_changed.connect(%ProgressBar.update_progress)
+	await ProjectManager.loaded_new_project
+	thread.wait_to_finish.call_deferred()
+	%ProgressBar.hide()
+	
+	ProjectManager.progress_changed.disconnect(%ProgressBar.update_progress)
+	get_tree().change_scene_to_packed(animation_overview_scene)
 
 
 func preview_project() -> void:

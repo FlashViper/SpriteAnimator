@@ -1,0 +1,24 @@
+{
+	"animation_data": {
+		"": {
+			"frames": [
+				"/icon.png",
+				"/NewShmarshmallow.png",
+				"/player.png",
+				"/player_wallslide_0002.png",
+				"/tiles.png"
+			],
+			"loops": true,
+			"name": "",
+			"visible": true
+		}
+	},
+	"export_path": "",
+	"textures": [
+		"/icon.png",
+		"/NewShmarshmallow.png",
+		"/player.png",
+		"/player_wallslide_0002.png",
+		"/tiles.png"
+	]
+}

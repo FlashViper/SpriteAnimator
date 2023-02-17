@@ -8,7 +8,9 @@ extends Control
 #@export var rectangle_size := 64
 
 var draw_offset : Vector2 :
-	set(new): set_draw_offset
+	set(new):
+		draw_offset = new
+		queue_redraw()
 
 func _draw() -> void:
 	if !texture:
@@ -27,7 +29,3 @@ func _draw() -> void:
 
 func offset(by: Vector2) -> void:
 	draw_offset = draw_offset + by
-
-func set_draw_offset(new: Vector2) -> void:
-	draw_offset = new
-	queue_redraw()

@@ -8,14 +8,20 @@ const SpriteFrame := AnimationGroup.SpriteFrame
 
 const ProjectFiles := preload("project_filesystem.gd")
 
+signal loaded_new_project
+signal progress_changed(new: float, message: String)
+
 var source_directory : String
 var export_file_name : String = "RESULT"
-var export_path : String
+var export_path : String = "res://"
 
 var raw_sprites := {}
 var animation_data : Dictionary = {}
 var filesystem : ProjectFiles
 
+# Loading Stuff
+var current_progress := 0.0
+var current_progress_message := ""
 
 func _ready() -> void:
 	filesystem = ProjectFiles.new()
@@ -59,32 +65,64 @@ func load_project(path: String) -> void:
 	if !DirAccess.dir_exists_absolute(path):
 		return
 	
+	print("Started loading ", path)
+	
 	var file_path := "%s/%s" % [path, PROJECT_FILE]
+	current_progress = 0.0
+	current_progress_message = ""
 	
 	source_directory = path
 	raw_sprites = {}
 	animation_data = {}
 	
-	if FileAccess.file_exists(path):
-		var f := FileAccess.open(path, FileAccess.READ)
+	if FileAccess.file_exists(file_path):
+		print("Loading project file")
+		
+		var f := FileAccess.open(file_path, FileAccess.READ)
 		var data : Dictionary = JSON.parse_string(f.get_as_text())
 		
 		export_path = data.export_path
 		animation_data = data.animation_data
-		for tex in data.textures:
-			raw_sprites[tex] = filesystem.load_texture(tex)
 		
+		var progress_per_texture : float = 1.0 / data.textures.size()
+		for tex in data.textures:
+			print(tex)
+			current_progress_message = "Loading %s" % tex
+			progress_changed.emit(
+				current_progress,
+				current_progress_message
+			)
+			
+			raw_sprites[tex] = filesystem.load_texture(path + "/" + tex)
+			current_progress += progress_per_texture
 	
 	reload_project()
 	save_project(file_path)
+	loaded_new_project.emit()
+	
+	# allows to work with multithreading
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 
 func reload_project(reset_data := false) -> void:
+	print("Reloading Directory")
+	
 	var data := filesystem.get_files_from_dir(source_directory)
 	raw_sprites = {}
 	animation_data = {}
 	
+	current_progress = 0
+	current_progress_message = ""
+	
 	for anim_name in data:
+		print("Searching ", anim_name)
+		current_progress_message = "Searching %s" % anim_name
+		progress_changed.emit(
+			current_progress,
+			current_progress_message
+		)
+		
 		var filenames := data[anim_name] as PackedStringArray
 		if filenames.size() < 1:
 			continue
@@ -100,6 +138,8 @@ func reload_project(reset_data := false) -> void:
 				"loops": true,
 				"visible": true,
 			}
+		
+		current_progress += 1.0 / data.size()
 
 
 func load_frames(anim_name: String, filenames: PackedStringArray) -> Array[String]:
@@ -122,8 +162,8 @@ func export_project(path := "") -> void:
 	if path != "":
 		export_path = path
 	
-	if export_path == "":
-		export_path = await FileSystem.request_directory()#save_file(["sanim"])
+#	if export_path == "":
+#		export_path = await FileSystem.request_directory()#save_file(["sanim"])
 	
 	var visible_animations := []
 	for anim in animation_data:
@@ -160,20 +200,18 @@ func export_project(path := "") -> void:
 		group.animations.append(animation)
 	
 	var packer := TexturePacker.new()
-	var pack_data := packer.pack_textures(textures)
+	var pack_data : Dictionary = packer.pack_textures(textures)
+	group.sprite_frames = pack_data["frames"]
+	
 	if pack_data.is_empty():
 		return
 	
-	group.sprite_frames = pack_data.frames
-	
-#	print(export_path + "/" + export_file_name + ".")
-#	print("HIIIIIIIII")
-	var export_path_template := "%s/%s." % [export_path, export_file_name]
-	var tex : Texture2D = pack_data.texture
-	tex.get_image().save_png(export_path_template + "png")
+	var export_path_template := "%s/%s.%s" % [export_path, export_file_name, "%s"]
+	print(export_path_template)
+	pack_data.texture.get_image().save_png(export_path_template % "png")
 	
 	var atlas_data := group.to_dictionary()
-	atlas_data.texture_path = export_path_template + "png"
-	
-	var file := FileAccess.open(export_path_template + "sanim", FileAccess.WRITE)
-	file.store_string(JSON.stringify(atlas_data, "\t"))
+	atlas_data.texture_path = export_path_template % "png"
+
+	var file := FileAccess.open(export_path_template % "sanim", FileAccess.WRITE)
+	file.store_string(JSON.stringify(atlas_data, "\t", false))

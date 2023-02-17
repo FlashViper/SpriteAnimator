@@ -3,7 +3,7 @@
 		"file": "FlashViper Animation Group",
 		"version": "0.1"
 	},
-	"texture_path": "",
+	"texture_path": "res:///RESULT.png",
 	"frames": [
 		{
 			"region": "[P: (782, 508), S: (77, 131)]",
@@ -18,11 +18,11 @@
 			"pivot": "(39, 62)"
 		},
 		{
-			"region": "[P: (717, 0), S: (83, 130)]",
+			"region": "[P: (717, 146), S: (83, 130)]",
 			"pivot": "(42, 62)"
 		},
 		{
-			"region": "[P: (717, 146), S: (83, 129)]",
+			"region": "[P: (717, 0), S: (83, 129)]",
 			"pivot": "(39, 62)"
 		},
 		{
@@ -58,7 +58,7 @@
 			"pivot": "(93, 63)"
 		},
 		{
-			"region": "[P: (363, 115), S: (122, 115)]",
+			"region": "[P: (368, 115), S: (122, 115)]",
 			"pivot": "(90, 62)"
 		},
 		{

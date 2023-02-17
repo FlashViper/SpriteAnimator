@@ -15,7 +15,9 @@ func _ready() -> void:
 	%ListRoot.animation_clicked.connect(preview)
 	%ListRoot.animation_toggled.connect(toggle_animation)
 	
-	load_directory("res://test/player_split")
+	await get_tree().process_frame
+	preview(0)
+#	load_directory("res://test/player_split")
 
 
 func toggle_animation(index: int) -> void:
@@ -34,11 +36,10 @@ func on_load_pressed() -> void:
 func preview(index: int) -> void:
 	await get_tree().process_frame
 	
-	var anim := ProjectManager.get_animation(index)
 	var textures : Array[Texture2D] = []
 	
-	for frame_index in anim["frames"]:
-		textures.append(ProjectManager.get_frame(frame_index))
+	for frame_index in ProjectManager.raw_sprites:
+		textures.append(ProjectManager.raw_sprites[frame_index])
 	
 	%Display.set_animation(textures)
 	%Display.update_scale()
@@ -81,30 +82,31 @@ func load_texture(path: String) -> Texture2D:
 
 
 func on_save_pressed() -> void:
-	const PATH := "res://test/RESULT.%s"
-	
-	var animations := ProjectManager.get_visible_animations()
-	var visible_frames : Array[int] = []
-	
-	for a in animations:
-		for f in a.frames:
-			if !visible_frames.has(f):
-				visible_frames.append(f)
-	
-	var textures : Array[Texture2D] = []
-	for v in visible_frames:
-		textures.append(ProjectManager.get_frame(v))
-	
-	var packer := TexturePacker.new()
-	var data := packer.pack_textures(textures)
-	
-	var source_texture := data["texture"] as Texture2D
-	var frames = data["frames"] as Array[SpriteFrame]
-	
-	var group := AnimationGroup.new()
-	group.base_texture = source_texture
-	group.animations = animations
-	group.sprite_frames = frames
-	
-	var img := source_texture.get_image().save_png(PATH % "png")
-	group.save_to_file(PATH % "sanim")
+	ProjectManager.export_project()
+#	const PATH := "res://test/RESULT.%s"
+#
+#	var animations := ProjectManager.get_visible_animations()
+#	var visible_frames : Array[int] = []
+#
+#	for a in animations:
+#		for f in a.frames:
+#			if !visible_frames.has(f):
+#				visible_frames.append(f)
+#
+#	var textures : Array[Texture2D] = []
+#	for v in visible_frames:
+#		textures.append(ProjectManager.get_frame(v))
+#
+#	var packer := TexturePacker.new()
+#	var data := packer.pack_textures(textures)
+#
+#	var source_texture := data["texture"] as Texture2D
+#	var frames = data["frames"] as Array[SpriteFrame]
+#
+#	var group := AnimationGroup.new()
+#	group.base_texture = source_texture
+#	group.animations = animations
+#	group.sprite_frames = frames
+#
+#	var img := source_texture.get_image().save_png(PATH % "png")
+#	group.save_to_file(PATH % "sanim")

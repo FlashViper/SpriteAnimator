@@ -28,6 +28,10 @@ func pack_textures(textures: Array[Texture2D]) -> Dictionary:
 		frames[i].region = packed.result[i]
 	
 	var tex := assemble_texture(data, packed.width, packed.height)
+	print({
+		"frames": frames,
+		"texture": tex
+	})
 	
 	return {
 		"frames": frames,
@@ -62,13 +66,13 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 	remapped.sort_custom(func(a: int, b: int): return rects[a].get_area() < rects[b].get_area())
 	
 	for i in remapped.size():
-		var index := remapped.pop_back()
+		var index : int = remapped.pop_back()
 		var rect : Rect2i = rects[index] # get the rect with the next most area
 		var placed_rect := Rect2i(Vector2i(), rect.size)
 		var min_area := INF
-		var min_ratio := INF
-		var min_dist_to_home := INF
-		var min_index := -1
+#		var min_ratio := INF
+#		var min_dist_to_home := INF
+#		var min_index := -1
 		
 		for n in availible_points.size():
 			var a := availible_points[n]
@@ -88,7 +92,7 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 				
 				placed_rect.position = a
 				min_area = area
-				min_index = n
+#				min_index = n
 		
 		max_x = maxi(max_x, placed_rect.end.x)
 		max_y = maxi(max_y, placed_rect.end.y)
@@ -180,6 +184,5 @@ func assemble_texture(data: Array[Dictionary], width: int, height: int) -> Textu
 		img.blit_rect(source.get_image(), source_region, atlas_region.position)
 	
 
-	var tex := ImageTexture.new()
-	tex.set_image(img)
+	var tex := ImageTexture.create_from_image(img)
 	return tex

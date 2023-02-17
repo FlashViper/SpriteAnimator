@@ -13,7 +13,7 @@ func get_files_from_dir(path: String) -> Dictionary:
 	var open : Array[String] = [""]
 	
 	while open.size() > 0:
-		var current_path := open.pop_front()
+		var current_path : int = open.pop_front()
 		var files := PackedStringArray()
 		
 		var dir := DirAccess.open("%s/%s" % [path, current_path])

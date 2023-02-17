@@ -1,0 +1,150 @@
+[gd_scene load_steps=14 format=3 uid="uid://c21hrqyy5cqvc"]
+
+[ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_ac1xt"]
+[ext_resource type="StyleBox" uid="uid://d1g60f0qfeegt" path="res://gui/theme/styleboxes/panel_main.tres" id="2_8cv80"]
+[ext_resource type="StyleBox" uid="uid://cfwbeqpfcwcpp" path="res://gui/theme/styleboxes/subpanel_inner_shadow.tres" id="3_4cn2m"]
+[ext_resource type="Texture2D" uid="uid://cgb57hx41apgw" path="res://gui/theme/icons/icon_visible_true.png" id="3_rjh8b"]
+[ext_resource type="Texture2D" uid="uid://cu5nboty6l4b1" path="res://gui/theme/panels/panel_shadow.png" id="3_rs087"]
+[ext_resource type="Texture2D" uid="uid://rsuk8vqqx36m" path="res://gui/theme/icons/icon_play.png" id="4_k5kl8"]
+[ext_resource type="PackedScene" uid="uid://b05w68m4mosn6" path="res://basic_cleaner/gui/list_item.tscn" id="4_pengb"]
+[ext_resource type="Script" path="res://modules/display/display_grid.gd" id="4_q01ck"]
+[ext_resource type="Texture2D" uid="uid://by8lyd3mpq7tj" path="res://gui/theme/icons/icon_loop_on.png" id="5_5g8gj"]
+[ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://gui/grid.png" id="5_qcg7x"]
+[ext_resource type="Texture2D" uid="uid://dtpwswwq22sk" path="res://gui/theme/icons/icon_edit.png" id="6_nvcvl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1uk4o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x4il4"]
+blend_mode = 3
+
+[node name="AnimationOverview" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ac1xt")
+theme_type_variation = &"Main Panel"
+theme_override_styles/panel = ExtResource("2_8cv80")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="MainPanels" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Column_List" type="VBoxContainer" parent="MarginContainer/MainPanels"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MainPanels/Column_List"]
+layout_mode = 2
+placeholder_text = "Filter Animations"
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/MainPanels/Column_List"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("3_4cn2m")
+
+[node name="List_Scroll" type="ScrollContainer" parent="MarginContainer/MainPanels/Column_List/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListRoot" type="VBoxContainer" parent="MarginContainer/MainPanels/Column_List/PanelContainer/List_Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ListItem" parent="MarginContainer/MainPanels/Column_List/PanelContainer/List_Scroll/ListRoot" instance=ExtResource("4_pengb")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MainPanels/Column_List/PanelContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/MainPanels/Column_List"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/MainPanels/Column_List"]
+layout_mode = 2
+text = "Pack Animations"
+
+[node name="Column_Preview" type="VBoxContainer" parent="MarginContainer/MainPanels"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Display" type="Control" parent="MarginContainer/MainPanels/Column_Preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Grid" type="Control" parent="MarginContainer/MainPanels/Column_Preview/Display"]
+material = SubResource("CanvasItemMaterial_1uk4o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_q01ck")
+texture = ExtResource("5_qcg7x")
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/MainPanels/Column_Preview/Display"]
+material = SubResource("CanvasItemMaterial_x4il4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_rs087")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainPanels/Column_Preview"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Visible" type="TextureButton" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("3_rjh8b")
+stretch_mode = 5
+
+[node name="Play" type="TextureButton" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("4_k5kl8")
+stretch_mode = 5
+
+[node name="Loops" type="TextureButton" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = ExtResource("5_5g8gj")
+stretch_mode = 5
+
+[node name="Edit" type="Button" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Edit"
+icon = ExtResource("6_nvcvl")
+
+[node name="Properties" type="Button" parent="MarginContainer/MainPanels/Column_Preview/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Properties"
+icon = ExtResource("6_nvcvl")

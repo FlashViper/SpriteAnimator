@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://yf3bedg53usd"]
+[gd_scene load_steps=9 format=3 uid="uid://blfj4hf5mpf34"]
 
-[ext_resource type="Theme" uid="uid://ch6jp4iqxgjs7" path="res://gui/theme_default.tres" id="1_qtch4"]
+[ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_qtch4"]
 [ext_resource type="Script" path="res://basic_cleaner/scripts/animation_manager.gd" id="2_r0hrm"]
 [ext_resource type="Script" path="res://basic_cleaner/animation_list.gd" id="3_kd8lf"]
 [ext_resource type="PackedScene" uid="uid://b05w68m4mosn6" path="res://basic_cleaner/gui/list_item.tscn" id="4_sun7o"]
@@ -70,7 +70,6 @@ horizontal_alignment = 1
 [node name="PropertiesRoot" type="VBoxContainer" parent="HBoxContainer/List/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="LoopToggle" type="Button" parent="HBoxContainer/List/VBoxContainer/PropertiesRoot"]
 unique_name_in_owner = true
@@ -131,6 +130,7 @@ texture = ExtResource("6_tl4xv")
 
 [node name="Display" type="Node2D" parent="HBoxContainer/VBoxContainer/Canvas/CanvasRoot"]
 unique_name_in_owner = true
+texture_filter = 1
 position = Vector2(591, 407)
 script = ExtResource("5_mcac0")
 

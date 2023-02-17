@@ -1,16 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://b05w68m4mosn6"]
+[gd_scene load_steps=5 format=3 uid="uid://b05w68m4mosn6"]
 
 [ext_resource type="Script" path="res://basic_cleaner/gui/list_item.gd" id="1_nhw2w"]
+[ext_resource type="StyleBox" uid="uid://dgddgm3itd081" path="res://gui/theme/styleboxes/panel_flat_small.tres" id="2_audhx"]
+[ext_resource type="Texture2D" uid="uid://cgb57hx41apgw" path="res://gui/theme/icons/icon_visible_true.png" id="3_g66ru"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_at61g"]
+line_spacing = 10.0
+font_size = 26
 
 [node name="ListItem" type="MarginContainer"]
 offset_right = 481.0
-offset_bottom = 51.0
+offset_bottom = 64.0
 mouse_filter = 0
 script = ExtResource("1_nhw2w")
 
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_audhx")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 2
@@ -24,9 +31,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Animation Name"
+label_settings = SubResource("LabelSettings_at61g")
+vertical_alignment = 1
 clip_text = true
 
-[node name="VisibilityToggle" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="VisibilityToggle" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "visible"
+texture_normal = ExtResource("3_g66ru")
