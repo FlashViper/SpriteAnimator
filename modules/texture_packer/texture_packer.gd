@@ -3,7 +3,7 @@ extends RefCounted
 const SpriteFrame := AnimationGroup.SpriteFrame
 
 
-func pack_textures(textures: Array[Texture2D]) -> Dictionary:
+func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 	if textures == null:
 		printerr("Tried to pass a null array to pack_textures in texture_packer.gd")
 		return {}
@@ -14,7 +14,7 @@ func pack_textures(textures: Array[Texture2D]) -> Dictionary:
 	for f in frames:
 		rects.append(f.region)
 	
-	var packed := pack_rects(rects, 15)
+	var packed := pack_rects(rects, parameters.get("padding", 10))
 	var data : Array[Dictionary] = []
 	
 	for i in frames.size():

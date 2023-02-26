@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bthhh427gkvet"]
+
+[ext_resource type="Script" path="res://test/animated_sprite/animated_sprite_test.gd" id="1_04hdg"]
+[ext_resource type="Script" path="res://addons/animated_sprite_5d/animated_sprite_5d.gd" id="1_hhk1j"]
+
+[node name="AnimatedSpriteTest" type="Node"]
+script = ExtResource("1_04hdg")
+
+[node name="AnimatedSprite5D" type="Node2D" parent="."]
+position = Vector2(721, 435)
+script = ExtResource("1_hhk1j")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 102.0
+offset_top = 74.0
+offset_right = 231.0
+offset_bottom = 126.0
+text = "open"

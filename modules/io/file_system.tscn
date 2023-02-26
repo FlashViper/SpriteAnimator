@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dort6li21nncw"]
+[gd_scene load_steps=3 format=3 uid="uid://dort6li21nncw"]
 
+[ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_e465p"]
 [ext_resource type="Script" path="res://modules/io/file_system.gd" id="1_jk11y"]
 
 [node name="FileSystem" type="FileDialog"]
-size = Vector2i(935, 342)
+size = Vector2i(935, 392)
+theme = ExtResource("1_e465p")
 ok_button_text = "Save"
 access = 2
 script = ExtResource("1_jk11y")

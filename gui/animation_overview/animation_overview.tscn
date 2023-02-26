@@ -74,7 +74,8 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/MainPanels/Column_List"]
+[node name="Pack" type="Button" parent="MarginContainer/MainPanels/Column_List"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Pack Animations"
 

@@ -7,10 +7,14 @@ extends PanelContainer
 
 
 func _ready() -> void:
+	print(preload("res://RESULT.sanim").sprite_frames)
 	%Play.pressed.connect(on_play_pressed)
 	%Loops.pressed.connect(on_toggle_loop)
 	%Edit.pressed.connect(on_edit_pressed)
 	%Properties.pressed.connect(on_properties_pressed)
+	%Pack.pressed.connect(
+		ProjectManager.export_project
+	)
 	
 	await get_tree().process_frame
 	reload_animations()
@@ -24,6 +28,7 @@ func reload_animations() -> void:
 		var item := list_item.instantiate()
 		item.set_animation_name(a)
 		item.selected.connect(change_animation.bind(a))
+		item.visibility_toggled.connect(ProjectManager.toggle_visible.bind(a))
 		list_root.add_child(item)
 	
 	change_animation(ProjectManager.animation_data.keys()[0])
