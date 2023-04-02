@@ -1,36 +1,28 @@
-extends Node
+class_name AnimationProject
+extends Resource
 
-
-var current_project : AnimationProject
-
-
-
-##########################################################
 const PROJECT_FILE := "animations.proj"
 
 const TexturePacker := preload("res://modules/texture_packer/texture_packer.gd")
 const SpriteAnimation := AnimationGroup.SpriteAnimation
 const SpriteFrame := AnimationGroup.SpriteFrame
 
-const ProjectFiles := preload("project_filesystem.gd")
+const ProjectFiles := preload("res://modules/project_manager/project_filesystem.gd")
 
 signal loaded_new_project
 signal progress_changed(new: float, message: String)
 
-var source_directory : String
-var export_file_name : String = "RESULT"
-var export_path : String = "res://"
+@export var source_directory : String
+@export var export_file_name : String = "RESULT"
+@export var export_path : String = "res://"
 
 var raw_sprites := {}
-var animation_data : Dictionary = {}
-var filesystem : ProjectFiles
+@export var animation_data : Dictionary = {}
+var filesystem := ProjectFiles.new()
 
 # Loading Stuff
 var current_progress := 0.0
 var current_progress_message := ""
-
-func _ready() -> void:
-	filesystem = ProjectFiles.new()
 
 
 func get_name_list() -> Array[String]:
@@ -63,6 +55,10 @@ func get_visible_animations() -> Array[SpriteAnimation]:
 
 
 func save_project(path: String) -> void:
+	print("HIII")
+	ResourceSaver.save(self, path + ".tres", ResourceSaver.FLAG_OMIT_EDITOR_PROPERTIES)
+	return
+	
 	var data := {
 		"export_path": export_path,
 		"textures": raw_sprites.keys(),
@@ -126,8 +122,8 @@ func load_project(path: String) -> void:
 	loaded_new_project.emit()
 	
 	# allows to work with multithreading
-	await get_tree().process_frame
-	await get_tree().process_frame
+#	await get_tree().process_frame
+#	await get_tree().process_frame
 
 
 func reload_project(reset_data := false) -> void:

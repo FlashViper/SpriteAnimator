@@ -19,6 +19,7 @@ func get_files_from_dir(path: String) -> Dictionary:
 		var current_path : String = open.pop_front()
 		var files := PackedStringArray()
 		
+		print("%s/%s" % [path, current_path])
 		var dir := DirAccess.open("%s/%s" % [path, current_path])
 		dir.list_dir_begin()
 		

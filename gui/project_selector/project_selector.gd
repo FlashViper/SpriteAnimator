@@ -39,20 +39,28 @@ func on_load_new_pressed() -> void:
 
 
 func load_directory(path: String) -> void:
-	thread.start(ProjectManager.load_project.bind(path))
-#	ProjectManager.load_project(path)
+	var project : AnimationProject = ResourceLoader.load(path + "/animations.proj.tres")
+	if project == null:
+		project = AnimationProject.new()
+		project.source_directory = path
+	project.reload_project()
+	project.save_project(path + "/animations.proj.tres")
+#	var project := AnimationProject.new()
+#	thread.start(project.load_project.bind(path))
+##	ProjectManager.load_project(path)
+#
+#	var filesystem := ProjectFiles.new()
+#	filesystem.add_recent_path(path)
+#
+#	%ProgressBar.show()
+#	%ProgressBar.initialize()
+#	project.progress_changed.connect(%ProgressBar.update_progress)
+#	await project.loaded_new_project
+#	thread.wait_to_finish.call_deferred()
+#	%ProgressBar.hide()
 	
-	var filesystem := ProjectFiles.new()
-	filesystem.add_recent_path(path)
-	
-	%ProgressBar.show()
-	%ProgressBar.initialize()
-	ProjectManager.progress_changed.connect(%ProgressBar.update_progress)
-	await ProjectManager.loaded_new_project
-	thread.wait_to_finish.call_deferred()
-	%ProgressBar.hide()
-	
-	ProjectManager.progress_changed.disconnect(%ProgressBar.update_progress)
+	ProjectManager.current_project = project
+#	project.progress_changed.disconnect(%ProgressBar.update_progress)
 	get_tree().change_scene_to_packed(animation_overview_scene)
 
 

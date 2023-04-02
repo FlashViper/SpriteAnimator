@@ -28,10 +28,6 @@ func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 		frames[i].region = packed.result[i]
 	
 	var tex := assemble_texture(data, packed.width, packed.height)
-	print({
-		"frames": frames,
-		"texture": tex
-	})
 	
 	return {
 		"frames": frames,
