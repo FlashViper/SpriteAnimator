@@ -68,12 +68,10 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 			var a := availible_points[n]
 			var new_max_x := maxi(max_x, a.x + rect.size.x)
 			var new_max_y := maxi(max_y, a.y + rect.size.y)
-			var area := Vector2(new_max_x, new_max_y).length_squared()
+			var cost := Vector2(new_max_x, new_max_y).length_squared()
 			
-			if area < min_area:
+			if cost < min_cost:
 				var overlaps := false
-				for r in result:
-					if r.intersects(Rect2i(a, rect.size)):
 				for idx in placed:
 					if placed[idx].intersects(Rect2i(a, rect.size)):
 						overlaps = true
@@ -83,8 +81,7 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 					continue
 				
 				placed_rect.position = a
-				min_area = area
-#				min_index = n
+				min_cost = cost
 		
 		max_x = maxi(max_x, placed_rect.end.x)
 		max_y = maxi(max_y, placed_rect.end.y)
