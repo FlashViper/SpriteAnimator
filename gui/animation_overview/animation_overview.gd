@@ -4,9 +4,10 @@ extends PanelContainer
 
 @onready var list_root: Node = %ListRoot
 @onready var preview_sprite : Node2D = %Preview
+@onready var pack_preview: Node2D = %PackPreview
 
 var project : AnimationProject
-
+var current_anim : String
 
 func _ready() -> void:
 	if ProjectManager.current_project:
@@ -15,7 +16,6 @@ func _ready() -> void:
 		project = AnimationProject.new()
 		ProjectManager.current_project = project
 	
-#	print(preload("res://RESULT.sanim").sprite_frames)
 	%Play.pressed.connect(on_play_pressed)
 	%Loops.pressed.connect(on_toggle_loop)
 	%Edit.pressed.connect(on_edit_pressed)
@@ -28,7 +28,8 @@ func _ready() -> void:
 
 func export() -> void:
 	if project:
-		project.export_project()
+		var data := await project.export_project()
+		%PackPreview.redraw(data)
 
 
 func reload_animations() -> void:
@@ -52,14 +53,20 @@ func change_animation(anim_name : String) -> void:
 		frames.append(project.raw_sprites[f])
 	
 	preview_sprite.set_animation(frames)
+	preview_sprite.loops = anim.loops
+	current_anim = anim_name
 
 
 func on_play_pressed() -> void:
-	pass
+	preview_sprite.refresh_animation()
 
 
 func on_toggle_loop() -> void:
-	pass
+	var loops := project.animation_data[current_anim]["loops"] as bool
+	loops = !loops
+	project.animation_data[current_anim]["loops"] = loops
+	preview_sprite.loops = loops
+	save()
 
 
 func on_edit_pressed() -> void:
@@ -68,3 +75,7 @@ func on_edit_pressed() -> void:
 
 func on_properties_pressed() -> void:
 	pass
+
+
+func save() -> void:
+	project.save_project(project.source_directory + "/animations.proj")
