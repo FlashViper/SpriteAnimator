@@ -159,6 +159,9 @@ func crop_rect(texture: Texture2D, alpha_threshold := 0.2, padding := 0) -> Rect
 			result.size.y = y - result.position.y
 			break
 	
+	# hacky fix because I don't know how to code well
+	# otherwise final result will be clipped by one pixel
+	result.size += Vector2i.ONE
 	return result
 
 
