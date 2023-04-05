@@ -11,7 +11,7 @@ extends Node2D
 var current_atlas : Texture2D
 var frames : Array[SpriteFrame]
 var current_anim : SpriteAnimation
-var progress : float
+var progress := 0.0
 
 
 func set_group(new: AnimationGroup) -> void:
