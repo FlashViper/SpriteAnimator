@@ -172,11 +172,6 @@ func assemble_texture(data: Array[Dictionary], width: int, height: int) -> Textu
 		var source := d.source_texture as Texture2D
 		var source_region := d.source_region as Rect2i
 		var atlas_region := d.atlas_region as Rect2i
-		var pivot := d.pivot as Vector2
-		
-		var frame := SpriteRegion.new()
-		frame.region = atlas_region
-		frame.pivot = pivot
 		
 		img.blit_rect(source.get_image(), source_region, atlas_region.position)
 	
