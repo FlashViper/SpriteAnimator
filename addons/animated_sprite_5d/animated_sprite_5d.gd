@@ -28,6 +28,8 @@ func play_animation(anim_name: String) -> void:
 
 
 func _process(delta: float) -> void:
+	if !current_anim:
+		return
 	progress += delta
 	if !current_anim.loops:
 		if progress > current_anim.frames.size() / float(fps):
