@@ -42,8 +42,12 @@ func _draw() -> void:
 		return
 	
 	var current_frame := int(wrapf(progress * fps, 0, current_anim.frames.size()))
-	var frame := animation_group.sprite_frames[current_frame]
+	var frame_index := current_anim.frames[current_frame]
+	var frame := animation_group.sprite_frames[frame_index]
 	var region := frame.region
 	
-	draw_texture_rect_region(animation_group.base_texture, Rect2(-frame.pivot, region.size), region)
-#	draw_texture(thing2[current_frame], Vector2.DOWN * 300)
+	draw_texture_rect_region(
+		animation_group.base_texture, 
+		Rect2(-frame.pivot, region.size), 
+		region
+	)
