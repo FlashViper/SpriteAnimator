@@ -45,7 +45,13 @@ func _get_import_options(path: String, preset_index: int) -> Array[Dictionary]:
 	return [{"name": "my_option", "default_value": false}]
 
 
-func _import(source_file: String, save_path: String, options: Dictionary, platform_variants, gen_files) -> int:
+func _import(
+			source_file: String, 
+			save_path: String, 
+			options: Dictionary, 
+			platform_variants, 
+			gen_files
+		) -> Error:
 	print("IMPORTINGGG")
 	if !FileAccess.file_exists(source_file):
 		return FAILED
