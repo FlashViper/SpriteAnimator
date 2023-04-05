@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/animated_sprite_5d/icons/AnimationGroup.svg")
 class_name AnimationGroup
 extends Resource
 

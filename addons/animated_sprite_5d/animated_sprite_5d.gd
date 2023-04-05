@@ -1,4 +1,5 @@
 @tool
+@icon("icons/AnimatedSprite5D.svg")
 class_name AnimatedSprite5D
 extends Node2D
 
