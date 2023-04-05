@@ -34,7 +34,7 @@ window/subwindows/embed_subwindows=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/animated_sprite_5D/plugin.cfg", "res://addons/atlas_creator/plugin.cfg")
+enabled=PackedStringArray("res://addons/animated_sprite_5D/plugin.cfg", "res://addons/animated_sprite_5d/plugin.cfg")
 
 [gui]
 
