@@ -27,7 +27,7 @@ func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 	var tex := assemble_texture(data, packed.width, packed.height)
 	
 	return {
-		"frames": frames,
+		"frames": data,
 		"texture": tex
 	}
 
