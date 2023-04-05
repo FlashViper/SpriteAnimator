@@ -5,11 +5,13 @@ signal animation_updated
 
 @export var fps := 12
 
-var animation : Array[Texture2D]
+var animation : Array[Texture2D] :
+	set = set_animation
+var loops := true :
+	set = set_loops
 
 var current_frame : int
 var timer : float
-var loops := true
 var animation_finished := false
 
 
