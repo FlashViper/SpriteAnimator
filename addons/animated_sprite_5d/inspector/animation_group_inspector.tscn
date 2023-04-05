@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjgcddj5xknj8"]
+
+[ext_resource type="Script" path="res://addons/animated_sprite_5d/inspector/animation_group_inspector_gui.gd" id="1_bgvj1"]
+[ext_resource type="Script" path="res://addons/animated_sprite_5d/animated_sprite_5d.gd" id="2_rsrp2"]
+[ext_resource type="Texture2D" uid="uid://6ijxtvwh23y4" path="res://gui/theme/icons/icon_search.png" id="3_nxrgm"]
+
+[node name="animation_group_inspector" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bgvj1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Inspect Animation Group"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="DisplayContainer" type="CenterContainer" parent="VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+
+[node name="Root" type="Control" parent="VBoxContainer/MarginContainer/DisplayContainer"]
+layout_mode = 2
+
+[node name="Display" type="Node2D" parent="VBoxContainer/MarginContainer/DisplayContainer/Root"]
+unique_name_in_owner = true
+texture_filter = 1
+script = ExtResource("2_rsrp2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AnimNames" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_nxrgm")
