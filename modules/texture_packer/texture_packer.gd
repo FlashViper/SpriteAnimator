@@ -100,9 +100,14 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 		availible_points.append(placed_rect.end + Vector2i.ONE * padding)
 		availible_points.append(Vector2i(placed_rect.position.x, placed_rect.end.y) + Vector2i(0, padding))
 		availible_points.append(Vector2i(placed_rect.end.x, placed_rect.position.y) + Vector2i(padding, 0))
-#		availible_points.append(Vector2i(max_x, max_y))
-		
-		result[index] = placed_rect
+		availible_points.append(Vector2i(max_x, max_y))
+		placed[index] = placed_rect
+#		result.append(placed_rect)
+#		result[index] = placed_rect
+	
+	var result : Array[Rect2i] = rects.duplicate()
+	for i in placed:
+		result[i] = placed[i]
 	
 	return {
 		"result": result,
