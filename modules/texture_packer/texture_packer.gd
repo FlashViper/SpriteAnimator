@@ -1,7 +1,5 @@
 extends RefCounted
 
-const SpriteFrame := AnimationGroup.SpriteFrame
-
 
 func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 	if textures == null:

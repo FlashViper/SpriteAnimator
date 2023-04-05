@@ -3,9 +3,6 @@
 class_name AnimatedSprite5D
 extends Node2D
 
-const SpriteAnimation := AnimationGroup.SpriteAnimation
-const SpriteFrame := AnimationGroup.SpriteFrame
-
 @export var animation_group : AnimationGroup
 @export var fps := 12
 

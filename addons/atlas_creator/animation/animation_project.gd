@@ -4,8 +4,6 @@ extends Resource
 const PROJECT_FILE := "animations.proj"
 
 const TexturePacker := preload("res://modules/texture_packer/texture_packer.gd")
-const SpriteAnimation := AnimationGroup.SpriteAnimation
-const SpriteFrame := AnimationGroup.SpriteFrame
 
 const ProjectFiles := preload("res://modules/project_manager/project_filesystem.gd")
 
