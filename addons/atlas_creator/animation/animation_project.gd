@@ -3,9 +3,15 @@ extends Resource
 
 const PROJECT_FILE := "animations.proj"
 
-const TexturePacker := preload("res://modules/texture_packer/texture_packer.gd")
+const TexturePacker := preload(
+	"res://modules/texture_packer/texture_packer.gd"
+)
+#const SpriteAnimation := AnimationGroup.SpriteAnimation
+#const SpriteFrame := AnimationGroup.SpriteFrame
 
-const ProjectFiles := preload("res://modules/project_manager/project_filesystem.gd")
+const ProjectFiles := preload(
+	"res://modules/project_manager/project_filesystem.gd"
+)
 
 signal loaded_new_project
 signal progress_changed(new: float, message: String)
@@ -53,8 +59,11 @@ func get_visible_animations() -> Array[SpriteAnimation]:
 
 
 func save_project(path: String) -> void:
-	print("HIII")
-	ResourceSaver.save(self, path + ".tres", ResourceSaver.FLAG_OMIT_EDITOR_PROPERTIES)
+	ResourceSaver.save(
+		self, 
+		path + ".tres", 
+		ResourceSaver.FLAG_OMIT_EDITOR_PROPERTIES
+	)
 	return
 	
 	var data := {
@@ -71,7 +80,7 @@ func load_project(path: String) -> void:
 	if !DirAccess.dir_exists_absolute(path):
 		return
 	
-	print("Started loading ", path)
+	print_debug("Started loading ", path)
 	
 	var file_path := "%s/%s" % [path, PROJECT_FILE]
 	current_progress = 0.0
@@ -82,7 +91,7 @@ func load_project(path: String) -> void:
 	animation_data = {}
 	
 	if FileAccess.file_exists(file_path):
-		print("Loading project file")
+		print_debug("Loading project file")
 		
 		var f := FileAccess.open(file_path, FileAccess.READ)
 		var data : Dictionary = JSON.parse_string(f.get_as_text())
@@ -125,17 +134,18 @@ func load_project(path: String) -> void:
 
 
 func reload_project(reset_data := false) -> void:
-	print("Reloading Directory")
+	print_debug("Reloading Directory")
 	
 	var data := filesystem.get_files_from_dir(source_directory)
 	raw_sprites = {}
-	animation_data = {}
+	if reset_data:
+		animation_data = {}
 	
 	current_progress = 0
 	current_progress_message = ""
 	
 	for anim_name in data:
-		print("Searching ", anim_name)
+		print_debug("Searching ", anim_name)
 		current_progress_message = "Searching %s" % anim_name
 		progress_changed.emit(
 			current_progress,
@@ -161,12 +171,19 @@ func reload_project(reset_data := false) -> void:
 		current_progress += 1.0 / data.size()
 
 
-func load_frames(anim_name: String, filenames: PackedStringArray) -> Array[String]:
+func load_frames(
+			anim_name: String, 
+			filenames: PackedStringArray
+			) -> Array[String]:
 	var frames : Array[String] = []
 	
 	for f in filenames:
 		var tex_id := "%s/%s" % [anim_name, f]
-		var tex := filesystem.load_texture("%s/%s/%s" % [source_directory, anim_name, f])
+		var tex := filesystem.load_texture("%s/%s/%s" % [
+			source_directory, 
+			anim_name, 
+			f
+		])
 		
 		if !tex:
 			continue
@@ -177,12 +194,12 @@ func load_frames(anim_name: String, filenames: PackedStringArray) -> Array[Strin
 	return frames
 
 
-func export_project(path := "") -> void:
+func export_project(path := "") -> Dictionary:
 	if path != "":
 		export_path = path
 	
 	if export_path == "":
-		export_path = await FileSystem.request_directory()#save_file(["sanim"])
+		export_path = await FileSystem.request_directory()
 	
 	var visible_animations := []
 	for anim in animation_data:
@@ -220,16 +237,31 @@ func export_project(path := "") -> void:
 	
 	var packer := TexturePacker.new()
 	var pack_data : Dictionary = packer.pack_textures(textures)
-	group.sprite_frames = pack_data["frames"]
+	
+	group.sprite_frames = []
+	for f in pack_data["frames"]:
+		var frame := SpriteFrame.new()
+		frame.region = f["atlas_region"]
+		frame.pivot = f["pivot"]
+		group.sprite_frames.append(frame) 
+	
 	
 	if pack_data.is_empty():
-		return
+		return {}
 	
-	var export_path_template := "%s/%s.%s" % [export_path, export_file_name, "%s"]
+	var export_path_template := "%s/%s.%s" % [
+		export_path, 
+		export_file_name, 
+		"%s"
+	]
 	pack_data.texture.get_image().save_png(export_path_template % "png")
 	
 	var atlas_data := group.to_dictionary()
 	atlas_data.texture_path = export_path_template % "png"
 
-	var file := FileAccess.open(export_path_template % "sanim", FileAccess.WRITE)
+	var file := FileAccess.open(
+		export_path_template % "sanim", 
+		FileAccess.WRITE
+	)
 	file.store_string(JSON.stringify(atlas_data, "\t", false))
+	return pack_data
