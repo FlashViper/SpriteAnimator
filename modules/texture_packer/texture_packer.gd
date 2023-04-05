@@ -50,7 +50,7 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 	for i in rects.size():
 		remapped.append(i)
 	
-	var result : Array[Rect2i] = rects.duplicate()
+	var placed := {}
 	var availible_points : Array[Vector2i] = [Vector2i.ZERO]
 	var max_x := 0
 	var max_y := 0
@@ -62,10 +62,7 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 		var index : int = remapped.pop_back()
 		var rect : Rect2i = rects[index] # get the rect with the next most area
 		var placed_rect := Rect2i(Vector2i(), rect.size)
-		var min_area := INF
-#		var min_ratio := INF
-#		var min_dist_to_home := INF
-#		var min_index := -1
+		var min_cost := INF
 		
 		for n in availible_points.size():
 			var a := availible_points[n]
@@ -77,6 +74,8 @@ func pack_rects(rects: Array[Rect2i], padding := 0) -> Dictionary:
 				var overlaps := false
 				for r in result:
 					if r.intersects(Rect2i(a, rect.size)):
+				for idx in placed:
+					if placed[idx].intersects(Rect2i(a, rect.size)):
 						overlaps = true
 						break
 				
