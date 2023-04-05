@@ -6,7 +6,7 @@ func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 		printerr("Tried to pass a null array to pack_textures in texture_packer.gd")
 		return {}
 	
-	var frames : Array[SpriteFrame] = crop_to_frame(textures)
+	var frames : Array[SpriteRegion] = crop_to_frame(textures)
 	
 	var rects : Array[Rect2i] = []
 	for f in frames:
@@ -16,12 +16,11 @@ func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 	var data : Array[Dictionary] = []
 	
 	for i in frames.size():
-		data.append({
-			"atlas_region": packed.result[i],
-			"source_texture": textures[i],
-			"source_region": frames[i].region,
-			"pivot": frames[i].pivot,
-		})
+		var frame_data := frames[i].get_data()
+		frame_data["source_texture"] = textures[i]
+		frame_data["atlas_region"] = packed["result"][i]
+		
+		data.append(frame_data)
 		
 		frames[i].region = packed.result[i]
 	
@@ -33,12 +32,12 @@ func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 	}
 
 
-func crop_to_frame(textures : Array[Texture2D]) -> Array[SpriteFrame]:
-	var frames : Array[SpriteFrame] = []
+func crop_to_frame(textures : Array[Texture2D]) -> Array[SpriteRegion]:
+	var frames : Array[SpriteRegion] = []
 	
 	# first, crop the textures into their usable rects
 	for t in textures:
-		var frame := SpriteFrame.new()
+		var frame := SpriteRegion.new()
 		frame.region = crop_rect(t)
 		frame.pivot = (t.get_size() * 0.5) - Vector2(frame.region.position)
 		frames.append(frame)
@@ -171,7 +170,7 @@ func assemble_texture(data: Array[Dictionary], width: int, height: int) -> Textu
 		var atlas_region := d.atlas_region as Rect2i
 		var pivot := d.pivot as Vector2
 		
-		var frame := SpriteFrame.new()
+		var frame := SpriteRegion.new()
 		frame.region = atlas_region
 		frame.pivot = pivot
 		
@@ -180,3 +179,14 @@ func assemble_texture(data: Array[Dictionary], width: int, height: int) -> Textu
 
 	var tex := ImageTexture.create_from_image(img)
 	return tex
+
+
+class SpriteRegion:
+	var region : Rect2i
+	var pivot : Vector2
+	
+	func get_data() -> Dictionary:
+		return {
+			"source_region": region,
+			"pivot": pivot,
+		}
