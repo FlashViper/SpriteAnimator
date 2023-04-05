@@ -27,10 +27,7 @@ func _get_plugin_name() -> String:
 
 func _edit(object) -> void:
 	if object is AnimationGroup:
-		print("EDITING ANIMATIONGROUP")
 		dock_panel.edit_animation(object)
-	else:
-		print("DESELECTED ANIMATIONGROUP")
 
 
 func _get_plugin_icon() -> Texture2D:

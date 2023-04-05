@@ -52,11 +52,9 @@ func _import(
 			platform_variants, 
 			gen_files
 		) -> Error:
-	print("IMPORTINGGG")
 	if !FileAccess.file_exists(source_file):
 		return FAILED
 		
-	print("before error")
 	var group := AnimationGroup.new()
 	group.load_from_file(source_file)
 	
@@ -66,5 +64,4 @@ func _import(
 	if err != OK:
 		printerr("Error code %04d while importing file %s: %s" % [err, source_file, error_string(err)])
 	
-	print("after error")
 	return err

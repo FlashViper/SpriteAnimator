@@ -7,7 +7,6 @@ func _ready() -> void:
 
 
 func create_animation() -> void:
-	print("Create Pressed")
 	var project := AnimationProject.new()
 	$AnimationOverview.set("project", project)
 	
