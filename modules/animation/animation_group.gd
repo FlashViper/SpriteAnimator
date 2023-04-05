@@ -33,20 +33,6 @@ func generate_mappings() -> void:
 		mappings[animations[i].name] = i
 
 
-class SpriteAnimation extends Resource:
-	var name : String
-	var frames : Array[int]
-	var loops : bool
-	
-	func size() -> int:
-		return (frames.size() if frames != null else 0)
-
-
-class SpriteFrame extends Resource:
-	var region : Rect2i
-	var pivot : Vector2
-
-
 func load_from_file(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
 	var data := JSON.parse_string(file.get_as_text()) as Dictionary
