@@ -9,16 +9,16 @@ const METADATA := {
 }
 
 @export var base_texture : Texture2D
-@export var sprite_frames : Array[SpriteFrame]
-@export var animations : Array[SpriteAnimation]
+@export var sprite_frames : Array[SpriteFrame] = []
+@export var animations : Array[SpriteAnimation] = []
 @export var default_animation := ""
-@export var mappings : Dictionary
+@export var mappings : Dictionary = {}
 
 
-func _init() -> void:
-	base_texture = null
-	sprite_frames = []
-	animations = []
+#func _init() -> void:
+#	base_texture = null
+#	sprite_frames = []
+#	animations = []
 
 
 func get_animation(name: String) -> SpriteAnimation:
@@ -49,7 +49,12 @@ func load_from_file(path: String) -> void:
 	sprite_frames = []
 	for f in data["frames"]:
 		var frame := SpriteFrame.new()
-		frame.region = Rect2(f["region"].x, f["region"].y, f["region"].w, f["region"].h) 
+		frame.region = Rect2(
+			f["region"].x, 
+			f["region"].y, 
+			f["region"].w, 
+			f["region"].h
+		) 
 		frame.pivot = Vector2(f["pivot"].x, f["pivot"].y)
 		sprite_frames.append(frame)
 	generate_mappings()
@@ -63,8 +68,6 @@ func load_from_file(path: String) -> void:
 			anim.frames.append(int(f))
 		anim.loops = a["loops"]
 		animations.append(anim)
-	
-	prints("Sprite Frames:", JSON.stringify(sprite_frames, ". . .", true))
 
 
 func to_dictionary() -> Dictionary:
