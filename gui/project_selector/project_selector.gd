@@ -37,14 +37,16 @@ func on_load_new_pressed() -> void:
 	if directory != "":
 		load_directory(directory)
 
-
+"res://test/swollow_knite/animations.proj.tres.tres"
 func load_directory(path: String) -> void:
 	var project : AnimationProject = ResourceLoader.load(path + "/animations.proj.tres")
 	if project == null:
 		project = AnimationProject.new()
 		project.source_directory = path
+	var filesystem = ProjectFiles.new()
+	filesystem.add_recent_path(path)
 	project.reload_project()
-	project.save_project(path + "/animations.proj.tres")
+	project.save_project(path + "/animations.proj")
 #	var project := AnimationProject.new()
 #	thread.start(project.load_project.bind(path))
 ##	ProjectManager.load_project(path)
