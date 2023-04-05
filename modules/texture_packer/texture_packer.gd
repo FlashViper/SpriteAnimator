@@ -12,7 +12,7 @@ func pack_textures(textures: Array[Texture2D], parameters := {}) -> Dictionary:
 	for f in frames:
 		rects.append(f.region)
 	
-	var packed := pack_rects(rects, parameters.get("padding", 10))
+	var packed := pack_rects(rects, parameters.get("padding", 2))
 	var data : Array[Dictionary] = []
 	
 	for i in frames.size():
