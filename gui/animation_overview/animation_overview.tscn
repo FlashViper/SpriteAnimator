@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dbx5pu4d4yah5"]
+[gd_scene load_steps=19 format=3 uid="uid://dbx5pu4d4yah5"]
 
 [ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_ac1xt"]
 [ext_resource type="StyleBox" uid="uid://d1g60f0qfeegt" path="res://gui/theme/styleboxes/panel_main.tres" id="2_8cv80"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dtpwswwq22sk" path="res://gui/theme/icons/icon_edit.png" id="6_nvcvl"]
 [ext_resource type="Script" path="res://gui/animation_overview/animation_preview.gd" id="7_oomet"]
 [ext_resource type="Script" path="res://gui/animation_overview/display_viewport.gd" id="7_vlgv0"]
+[ext_resource type="Script" path="res://gui/animation_overview/preview_pack.gd" id="11_y6asu"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1uk4o"]
 
@@ -108,6 +109,14 @@ unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(684, 458)
 script = ExtResource("7_oomet")
+
+[node name="PackPreview" type="Node2D" parent="MarginContainer/MainPanels/Column_Preview/Display"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+position = Vector2(-548, -40)
+script = ExtResource("11_y6asu")
+rect_scale = 4.0
 
 [node name="Shadow" type="NinePatchRect" parent="MarginContainer/MainPanels/Column_Preview/Display"]
 material = SubResource("CanvasItemMaterial_x4il4")
