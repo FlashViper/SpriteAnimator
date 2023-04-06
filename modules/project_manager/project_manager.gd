@@ -1,10 +1,16 @@
 extends Node
 
+
+var current_project : AnimationProject
+
+
+
+##########################################################
 const PROJECT_FILE := "animations.proj"
 
 const TexturePacker := preload("res://modules/texture_packer/texture_packer.gd")
-const SpriteAnimation := AnimationGroup.SpriteAnimation
-const SpriteFrame := AnimationGroup.SpriteFrame
+#const SpriteAnimation := AnimationGroup.SpriteAnimation
+#const SpriteFrame := AnimationGroup.SpriteFrame
 
 const ProjectFiles := preload("project_filesystem.gd")
 
@@ -32,6 +38,12 @@ func get_name_list() -> Array[String]:
 	for a in animation_data:
 		names.append(a.name)
 	return names
+
+
+func toggle_visible(anim_name: String) -> bool:
+	var current := animation_data[anim_name].visible as bool
+	animation_data[anim_name].visible = !current
+	return !current
 
 
 func get_visible_animations() -> Array[SpriteAnimation]:
@@ -81,12 +93,8 @@ func load_project(path: String) -> void:
 		var f := FileAccess.open(file_path, FileAccess.READ)
 		var data : Dictionary = JSON.parse_string(f.get_as_text())
 		
-		export_path = data.export_path
-		animation_data = data.animation_data
-		
 		var progress_per_texture : float = 1.0 / data.textures.size()
 		for tex in data.textures:
-			print(tex)
 			current_progress_message = "Loading %s" % tex
 			progress_changed.emit(
 				current_progress,
@@ -95,6 +103,23 @@ func load_project(path: String) -> void:
 			
 			raw_sprites[tex] = filesystem.load_texture(path + "/" + tex)
 			current_progress += progress_per_texture
+		
+		
+		export_path = data["export_path"]
+		animation_data = data["animation_data"]
+#		for anim_name in data.animation_data:
+#			var frames : Array[int] = []
+#			for frame_path in data.animation_data[anim_name]:
+#				frames.append(raw_sprites[])
+#			var anim := {
+#				"frames": frames,
+#				"name": anim_name,
+#				"loops": data.animation_data[anim_name]["loops"],
+#				"visible": data.animation_data[anim_name]["visible"],
+#			}
+#
+#			animation_data[anim_name] = anim
+		
 	
 	reload_project()
 	save_project(file_path)
@@ -162,8 +187,8 @@ func export_project(path := "") -> void:
 	if path != "":
 		export_path = path
 	
-#	if export_path == "":
-#		export_path = await FileSystem.request_directory()#save_file(["sanim"])
+	if export_path == "":
+		export_path = await FileSystem.request_directory()#save_file(["sanim"])
 	
 	var visible_animations := []
 	for anim in animation_data:
@@ -207,7 +232,6 @@ func export_project(path := "") -> void:
 		return
 	
 	var export_path_template := "%s/%s.%s" % [export_path, export_file_name, "%s"]
-	print(export_path_template)
 	pack_data.texture.get_image().save_png(export_path_template % "png")
 	
 	var atlas_data := group.to_dictionary()

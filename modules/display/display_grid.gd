@@ -19,7 +19,6 @@ func _draw() -> void:
 	draw_texture_rect(texture, Rect2(Vector2(), size), true)
 	
 #	var local_offset := draw_offset.posmod(rectangle_size)
-#	print(local_offset)
 	
 #	for x in ceili(size.x):
 #		for y in ceili(size.y):

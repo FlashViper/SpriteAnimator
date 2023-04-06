@@ -1,0 +1,15 @@
+[remap]
+
+importer="flashviper.animation.importer_animation_group"
+type="Resource"
+uid="uid://b1s5na3w3mt7q"
+path="res://.godot/imported/RESULT.sanim-5aea898593f84c529ddac45f18113c27.res"
+
+[deps]
+
+source_file="res://test/RESULT.sanim"
+dest_files=["res://.godot/imported/RESULT.sanim-5aea898593f84c529ddac45f18113c27.res"]
+
+[params]
+
+my_option=false

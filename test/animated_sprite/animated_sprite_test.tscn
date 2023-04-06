@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bthhh427gkvet"]
+
+[ext_resource type="Script" path="res://test/animated_sprite/animated_sprite_test.gd" id="1_04hdg"]
+[ext_resource type="Script" path="res://addons/animated_sprite_5d/animated_sprite_5d.gd" id="1_hhk1j"]
+[ext_resource type="Resource" uid="uid://jpaskwjaujvm" path="res://RESULT.sanim" id="3_m7rqh"]
+[ext_resource type="Script" path="res://test/animated_sprite/animated_sprite_debug.gd" id="4_8ruqx"]
+
+[node name="AnimatedSpriteTest" type="Node"]
+script = ExtResource("1_04hdg")
+
+[node name="AnimatedSprite5D" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(215, 210)
+scale = Vector2(3, 3)
+script = ExtResource("1_hhk1j")
+animation_group = ExtResource("3_m7rqh")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 102.0
+offset_top = 74.0
+offset_right = 231.0
+offset_bottom = 126.0
+text = "open"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 709.0
+offset_top = 161.0
+offset_right = 1165.0
+offset_bottom = 222.0
+placeholder_text = "Play an animation"
+
+[node name="AnimatedSpriteDebug" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(177, 458)
+scale = Vector2(3, 3)
+script = ExtResource("4_8ruqx")
+animation_group = ExtResource("3_m7rqh")

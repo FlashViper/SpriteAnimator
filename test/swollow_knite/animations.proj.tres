@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="AnimationProject" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/atlas_creator/animation/animation_project.gd" id="1_tik6i"]
+
+[resource]
+script = ExtResource("1_tik6i")
+source_directory = "C:/Users/ellio/Godot/Projects/SpriteAnimator/test/swollow_knite"
+export_file_name = "RESULT"
+export_path = "res://"
+animation_data = {
+"sk.png-DAir": {
+"frames": Array[String](["sk.png-DAir/swollow_knite_DAir_000.png"]),
+"loops": true,
+"name": "sk.png-DAir",
+"visible": true
+},
+"sk.png-DSmash": {
+"frames": Array[String](["sk.png-DSmash/swollow_knite_DSmash_000.png", "sk.png-DSmash/swollow_knite_DSmash_001.png", "sk.png-DSmash/swollow_knite_DSmash_002.png", "sk.png-DSmash/swollow_knite_DSmash_003.png", "sk.png-DSmash/swollow_knite_DSmash_004.png", "sk.png-DSmash/swollow_knite_DSmash_005.png", "sk.png-DSmash/swollow_knite_DSmash_006.png", "sk.png-DSmash/swollow_knite_DSmash_007.png", "sk.png-DSmash/swollow_knite_DSmash_008.png", "sk.png-DSmash/swollow_knite_DSmash_009.png", "sk.png-DSmash/swollow_knite_DSmash_010.png"]),
+"loops": false,
+"name": "sk.png-DSmash",
+"visible": true
+},
+"sk.png-Dive": {
+"frames": Array[String](["sk.png-Dive/swollow_knite_Dive_000.png", "sk.png-Dive/swollow_knite_Dive_001.png", "sk.png-Dive/swollow_knite_Dive_002.png", "sk.png-Dive/swollow_knite_Dive_003.png", "sk.png-Dive/swollow_knite_Dive_004.png", "sk.png-Dive/swollow_knite_Dive_005.png", "sk.png-Dive/swollow_knite_Dive_006.png", "sk.png-Dive/swollow_knite_Dive_007.png"]),
+"loops": true,
+"name": "sk.png-Dive",
+"visible": true
+},
+"sk.png-FAir": {
+"frames": Array[String](["sk.png-FAir/swollow_knite_FAir_000.png", "sk.png-FAir/swollow_knite_FAir_001.png", "sk.png-FAir/swollow_knite_FAir_002.png", "sk.png-FAir/swollow_knite_FAir_003.png"]),
+"loops": false,
+"name": "sk.png-FAir",
+"visible": true
+},
+"sk.png-FSmash": {
+"frames": Array[String](["sk.png-FSmash/swollow_knite_FSmash_000.png", "sk.png-FSmash/swollow_knite_FSmash_001.png", "sk.png-FSmash/swollow_knite_FSmash_002.png", "sk.png-FSmash/swollow_knite_FSmash_003.png", "sk.png-FSmash/swollow_knite_FSmash_004.png", "sk.png-FSmash/swollow_knite_FSmash_005.png", "sk.png-FSmash/swollow_knite_FSmash_006.png", "sk.png-FSmash/swollow_knite_FSmash_007.png"]),
+"loops": false,
+"name": "sk.png-FSmash",
+"visible": true
+},
+"sk.png-Fireball": {
+"frames": Array[String](["sk.png-Fireball/swollow_knite_Fireball_000.png", "sk.png-Fireball/swollow_knite_Fireball_001.png", "sk.png-Fireball/swollow_knite_Fireball_002.png", "sk.png-Fireball/swollow_knite_Fireball_003.png", "sk.png-Fireball/swollow_knite_Fireball_004.png", "sk.png-Fireball/swollow_knite_Fireball_005.png"]),
+"loops": true,
+"name": "sk.png-Fireball",
+"visible": true
+},
+"sk.png-Jump": {
+"frames": Array[String](["sk.png-Jump/swollow_knite_Jump_000.png", "sk.png-Jump/swollow_knite_Jump_001.png", "sk.png-Jump/swollow_knite_Jump_002.png", "sk.png-Jump/swollow_knite_Jump_003.png"]),
+"loops": true,
+"name": "sk.png-Jump",
+"visible": true
+},
+"sk.png-Ledge": {
+"frames": Array[String](["sk.png-Ledge/swollow_knite_Ledge_000.png", "sk.png-Ledge/swollow_knite_Ledge_001.png", "sk.png-Ledge/swollow_knite_Ledge_002.png", "sk.png-Ledge/swollow_knite_Ledge_003.png", "sk.png-Ledge/swollow_knite_Ledge_004.png", "sk.png-Ledge/swollow_knite_Ledge_005.png"]),
+"loops": true,
+"name": "sk.png-Ledge",
+"visible": true
+},
+"sk.png-Shield": {
+"frames": Array[String](["sk.png-Shield/swollow_knite_Shield_000.png"]),
+"loops": true,
+"name": "sk.png-Shield",
+"visible": true
+},
+"sk.png-USmash": {
+"frames": Array[String](["sk.png-USmash/swollow_knite_USmash_000.png", "sk.png-USmash/swollow_knite_USmash_001.png", "sk.png-USmash/swollow_knite_USmash_002.png"]),
+"loops": true,
+"name": "sk.png-USmash",
+"visible": true
+},
+"sk.png-UTilt": {
+"frames": Array[String](["sk.png-UTilt/swollow_knite_UTilt_000.png", "sk.png-UTilt/swollow_knite_UTilt_001.png", "sk.png-UTilt/swollow_knite_UTilt_002.png", "sk.png-UTilt/swollow_knite_UTilt_003.png", "sk.png-UTilt/swollow_knite_UTilt_004.png"]),
+"loops": true,
+"name": "sk.png-UTilt",
+"visible": true
+},
+"sk.png-UpSpecial": {
+"frames": Array[String](["sk.png-UpSpecial/swollow_knite_UpSpecial_000.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_001.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_002.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_003.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_004.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_005.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_006.png", "sk.png-UpSpecial/swollow_knite_UpSpecial_007.png"]),
+"loops": false,
+"name": "sk.png-UpSpecial",
+"visible": true
+}
+}

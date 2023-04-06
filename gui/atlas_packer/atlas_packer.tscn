@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4ax6t4x70hlf"]
+
+[ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_ydl4r"]
+[ext_resource type="Script" path="res://gui/atlas_packer/atlas_packer.gd" id="2_pyrwr"]
+[ext_resource type="Script" path="res://modules/display/display_grid.gd" id="3_lmssd"]
+[ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://gui/grid.png" id="4_8a7kp"]
+[ext_resource type="Texture2D" uid="uid://cu5nboty6l4b1" path="res://gui/theme/panels/panel_shadow.png" id="5_qgw4c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lf4j4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l2lk6"]
+blend_mode = 3
+
+[node name="AtlasPacker" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ydl4r")
+script = ExtResource("2_pyrwr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Display" type="Control" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Grid" type="Control" parent="MarginContainer/Display"]
+material = SubResource("CanvasItemMaterial_lf4j4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_lmssd")
+texture = ExtResource("4_8a7kp")
+
+[node name="Preview" type="Sprite2D" parent="MarginContainer/Display"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(684, 458)
+
+[node name="Shadow" type="NinePatchRect" parent="MarginContainer/Display"]
+material = SubResource("CanvasItemMaterial_l2lk6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_qgw4c")
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 18

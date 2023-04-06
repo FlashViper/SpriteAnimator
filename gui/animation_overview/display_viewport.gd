@@ -12,17 +12,16 @@ func _ready() -> void:
 func on_animation_updated() -> void:
 	var textures : Array[Texture2D] = $Preview.animation
 	
-	var max_size_x := 0.0
-	var max_size_y := 0.0
+	var max_size := Vector2()
 	for t in textures:
-		max_size_x = maxf(max_size_x, t.get_width())
-		max_size_y = maxf(max_size_y, t.get_height())
+		max_size.x = maxf(max_size.x, t.get_width())
+		max_size.y = maxf(max_size.y, t.get_height())
 	
 	viewport_position = Vector2()
 	viewport_rotation = 0
 	
-	var ratio := minf(size.x / max_size_x, size.y / max_size_y)
-	viewport_scale = ratio
+	var max_index := size.min_axis_index()
+	viewport_scale = size[max_index] / max_size[max_index]
 	
 	update_viewport()
 

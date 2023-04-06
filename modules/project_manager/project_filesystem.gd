@@ -14,7 +14,6 @@ var extensions : Array[String] = [
 func get_files_from_dir(path: String) -> Dictionary:
 	var result := {}
 	var open : Array[String] = [""]
-	
 	while open.size() > 0:
 		var current_path : String = open.pop_front()
 		var files := PackedStringArray()
@@ -67,3 +66,7 @@ func add_recent_path(new: String) -> void:
 	for n in new_paths:
 		if n:
 			f.store_line(n)
+
+
+func supports_image(extension: String) -> bool:
+	return extensions.has(extension)

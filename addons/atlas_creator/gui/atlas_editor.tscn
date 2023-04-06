@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdcm07vd756qj"]
+
+[ext_resource type="Theme" uid="uid://cjoh5r1fh3vv2" path="res://gui/theme/theme_default.tres" id="1_3n0gj"]
+[ext_resource type="Script" path="res://addons/atlas_creator/gui/atlas_editor.gd" id="2_3356i"]
+[ext_resource type="PackedScene" uid="uid://dbx5pu4d4yah5" path="res://gui/animation_overview/animation_overview.tscn" id="2_bkprk"]
+[ext_resource type="StyleBox" uid="uid://cfwbeqpfcwcpp" path="res://gui/theme/styleboxes/subpanel_inner_shadow.tres" id="3_gqfcs"]
+[ext_resource type="Script" path="res://addons/atlas_creator/gui/create_dialogue.gd" id="3_joadi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7j1bp"]
+font_size = 40
+font_color = Color(1, 1, 1, 0.333333)
+
+[node name="AtlasEditor" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_3n0gj")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("2_3356i")
+
+[node name="AnimationOverview" parent="." instance=ExtResource("2_bkprk")]
+visible = false
+layout_mode = 2
+
+[node name="CreateNew" type="PanelContainer" parent="."]
+layout_mode = 2
+script = ExtResource("3_joadi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CreateNew"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="PanelContainer" type="PanelContainer" parent="CreateNew/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_gqfcs")
+
+[node name="MarginContainer" type="CenterContainer" parent="CreateNew/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateNew/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Yelling At Player Label" type="Label" parent="CreateNew/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nothing selected :(
+You should be ashamed of yourself"
+label_settings = SubResource("LabelSettings_7j1bp")
+horizontal_alignment = 1
+
+[node name="CreateAnimation" type="Button" parent="CreateNew/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Create Animation Group"
+
+[node name="CreateAtlas" type="Button" parent="CreateNew/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Create Sprite Atlas"
