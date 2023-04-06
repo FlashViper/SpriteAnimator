@@ -80,7 +80,7 @@ func load_project(path: String) -> void:
 	if !DirAccess.dir_exists_absolute(path):
 		return
 	
-	print_debug("Started loading ", path)
+	print("Started loading ", path)
 	
 	var file_path := "%s/%s" % [path, PROJECT_FILE]
 	current_progress = 0.0
@@ -91,7 +91,7 @@ func load_project(path: String) -> void:
 	animation_data = {}
 	
 	if FileAccess.file_exists(file_path):
-		print_debug("Loading project file")
+		print("Loading project file")
 		
 		var f := FileAccess.open(file_path, FileAccess.READ)
 		var data : Dictionary = JSON.parse_string(f.get_as_text())
@@ -134,7 +134,7 @@ func load_project(path: String) -> void:
 
 
 func reload_project(reset_data := false) -> void:
-	print_debug("Reloading Directory")
+	print("Reloading Directory")
 	
 	var data := filesystem.get_files_from_dir(source_directory)
 	raw_sprites = {}
@@ -145,7 +145,7 @@ func reload_project(reset_data := false) -> void:
 	current_progress_message = ""
 	
 	for anim_name in data:
-		print_debug("Searching ", anim_name)
+		print("Searching ", anim_name)
 		current_progress_message = "Searching %s" % anim_name
 		progress_changed.emit(
 			current_progress,
