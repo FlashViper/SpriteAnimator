@@ -20,6 +20,12 @@ animation_data = {
 "name": "sk.png-DSmash",
 "visible": true
 },
+"sk.png-Dive": {
+"frames": Array[String](["sk.png-Dive/swollow_knite_Dive_000.png", "sk.png-Dive/swollow_knite_Dive_001.png", "sk.png-Dive/swollow_knite_Dive_002.png", "sk.png-Dive/swollow_knite_Dive_003.png", "sk.png-Dive/swollow_knite_Dive_004.png", "sk.png-Dive/swollow_knite_Dive_005.png", "sk.png-Dive/swollow_knite_Dive_006.png", "sk.png-Dive/swollow_knite_Dive_007.png"]),
+"loops": true,
+"name": "sk.png-Dive",
+"visible": true
+},
 "sk.png-FAir": {
 "frames": Array[String](["sk.png-FAir/swollow_knite_FAir_000.png", "sk.png-FAir/swollow_knite_FAir_001.png", "sk.png-FAir/swollow_knite_FAir_002.png", "sk.png-FAir/swollow_knite_FAir_003.png"]),
 "loops": false,
