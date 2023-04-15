@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AnimationProject" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AnimationProject" load_steps=2 format=3 uid="uid://vlp7j32fl3vo"]
 
 [ext_resource type="Script" path="res://addons/atlas_creator/animation/animation_project.gd" id="1_tik6i"]
 
