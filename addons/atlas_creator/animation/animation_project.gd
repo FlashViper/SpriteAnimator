@@ -263,5 +263,6 @@ func export_project(path := "") -> Dictionary:
 		export_path_template % "sanim", 
 		FileAccess.WRITE
 	)
+	
 	file.store_string(JSON.stringify(atlas_data, "\t", false))
 	return pack_data

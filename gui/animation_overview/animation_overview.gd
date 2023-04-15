@@ -43,7 +43,8 @@ func reload_animations() -> void:
 		item.visibility_toggled.connect(project.toggle_visible.bind(a))
 		list_root.add_child(item)
 	
-	change_animation(project.animation_data.keys()[0])
+	if project.animation_data.size() > 0:
+		change_animation(project.animation_data.keys()[0])
 
 
 func change_animation(anim_name : String) -> void:
