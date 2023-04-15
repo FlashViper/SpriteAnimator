@@ -10,6 +10,7 @@
 [resource]
 Button/styles/normal = ExtResource("1_ympfh")
 Label/font_sizes/font_size = 35
+LineEdit/styles/focus = ExtResource("1_jxcrh")
 LineEdit/styles/normal = ExtResource("1_jxcrh")
 MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 15
