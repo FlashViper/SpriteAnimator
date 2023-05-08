@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://modules/display/display_grid.gd" id="3_n1x7l"]
 [ext_resource type="Texture2D" uid="uid://bfp6i8x42gncu" path="res://gui/grid.png" id="4_rx6ro"]
 [ext_resource type="Script" path="res://gui/animation_overview/animation_preview.gd" id="5_f65e5"]
-[ext_resource type="Script" path="res://gui/data_editor/editors/collision_editor_polygon.gd" id="7_ggrrs"]
 [ext_resource type="Texture2D" uid="uid://cu5nboty6l4b1" path="res://gui/theme/panels/panel_shadow.png" id="7_l7eeh"]
+[ext_resource type="Script" path="res://gui/data_editor/editors/collision_editor_circle.gd" id="7_ym6sf"]
 [ext_resource type="Texture2D" uid="uid://cl5uuex8d0r62" path="res://icon.svg" id="8_uwa4w"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1p2ra"]
@@ -82,5 +82,8 @@ layout_mode = 2
 layout_mode = 2
 texture = ExtResource("8_uwa4w")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="Polygon" type="Node" parent="."]
-script = ExtResource("7_ggrrs")
+script = ExtResource("7_ym6sf")
