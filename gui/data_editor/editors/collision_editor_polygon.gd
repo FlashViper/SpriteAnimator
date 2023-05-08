@@ -1,3 +1,4 @@
+# Polygon Editor
 extends "property_editor.gd"
 
 var polygons : Array[Dictionary] = []
@@ -37,3 +38,13 @@ func _draw_controls() -> void:
 		
 		for point in p.points:
 			canvas.draw_circle(point, 10, line_color)
+
+
+func _get_data_id() -> String:
+	return "collision_polygon"
+
+
+func _store_data() -> Dictionary:
+	var data := {}
+	for p in polygons:
+		pass

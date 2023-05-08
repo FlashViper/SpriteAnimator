@@ -34,3 +34,7 @@ func _on_mouse_down(event: InputEventMouseButton) -> void: pass
 func _on_mouse_up(event: InputEventMouseButton) -> void: pass
 func _on_mouse_drag(event: InputEventMouseMotion) -> void: pass
 func _draw_controls() -> void: pass
+
+func _get_data_id() -> String: return ""
+func _parse_data(data: Dictionary) -> void: pass
+func _store_data() -> Dictionary: return {}

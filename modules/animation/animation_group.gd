@@ -15,6 +15,8 @@ const METADATA := {
 @export var mappings : Dictionary = {}
 
 
+@export var data_layers : Array[Dictionary] = []
+
 #func _init() -> void:
 #	base_texture = null
 #	sprite_frames = []
